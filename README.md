@@ -93,7 +93,7 @@ The application utilizes a series of key models within the database:
 
 ## Screenshots
 -**User Demographics Dashboard**
-
+![Screenshot 2024-12-14 at 14-29-09 User Demographics Dashboard](https://github.com/user-attachments/assets/2b73515e-b32b-44b7-aec9-ed10bf47ceb5)
 
 
 
