@@ -29,7 +29,7 @@ To set up and run the **Data Warehouse Dashboard** locally, follow these steps:
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/Mohamedosama-dev/ETL_Data_Warehouse_.git
+    git clone https://github.com/Mohamedosama-dev/ETL_Data_Warehouse.git
     cd etl_project
     ```
 
