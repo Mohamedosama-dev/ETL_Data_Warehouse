@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f9f9f9, #e6f7f8);
+            color: #333;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #5c6bc0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar .phrase {
+            font-size: 1.2rem;
+            font-weight: normal;
+            color: white;
+        }
+
+        .navbar .btn-end {
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: #5c6bc0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .btn-end:hover {
+            background-color: #f1f1f1;
+            color: #3f51b5;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #455a64;
+            margin-bottom: 30px;
+            font-size: 2.8rem;
+            font-weight: bold;
+            animation: slideDown 1.2s ease-in-out;
+        }
+
+        .charts-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 30px 20px;
+            gap: 20px;
+        }
+
+        .chart-container {
+            flex: 1 1 45%;
+            max-width: 45%;
+            margin: 10px;
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .chart-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .chart-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #455a64;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1rem;
+            color: #90a4ae;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Button styles */
+        .btn-refresh {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #81c784;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-refresh:hover {
+            background-color: #66bb6a;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-refresh:active {
+            transform: scale(0.98);
+        }
+
+        .btn-refresh:focus {
+            outline: none;
+        }
+
+        /* Color variations for cards */
+        .chart-container-1 {
+            background: #d7eaff; /* Soft Blue */
+            color: #333;
+        }
+
+        .chart-container-2 {
+            background: #e8f5e9; /* Light Green */
+            color: #333;
+        }
+
+        .chart-container-3 {
+            background: #ffebee; /* Light Red */
+            color: #333;
+        }
+
+        .chart-container-4 {
+            background: #ede7f6; /* Soft Purple */
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    {% load static %}
+    <div class="navbar">
+        <a href="#" class="logo">
+            <img src="{% static 'etl/images/90.jpeg' %}" alt="Logo">
+            Transaction Analytics
+        </a>
+        <button class="btn-end" onclick="window.location.href='http://127.0.0.1:8000/admin/etl_app/'">Admin Panel</button>
+    </div>
+
+    <h1>Transaction Analytics</h1>
+
+    <div class="charts-row">
+        <div class="chart-container chart-container-1">
+            <div class="chart-title">Total Transactions by Type</div>
+            <p>This chart shows the total number of transactions categorized by type, such as deposit, withdrawal, or transfer.</p>
+            <canvas id="transactionTypeChart"></canvas>
+        </div>
+        <div class="chart-container chart-container-2">
+            <div class="chart-title">Monthly Transaction Totals</div>
+            <p>This chart displays the total transaction amounts for each month, providing insights into transaction trends over time.</p>
+            <canvas id="monthlyTransactionsChart"></canvas>
+        </div>
+    </div>
+
+    <div class="charts-row">
+        <div class="chart-container chart-container-3">
+            <div class="chart-title">Transaction Breakdown by User Type</div>
+            <p>This chart represents the distribution of transactions between different user types, such as individual and corporate users.</p>
+            <canvas id="userTypeChart"></canvas>
+        </div>
+        <div class="chart-container chart-container-4">
+            <div class="chart-title">Cumulative Transaction Volume</div>
+            <p>This chart illustrates the cumulative transaction volume over time, highlighting growth patterns and peaks.</p>
+            <canvas id="volumeOverTimeChart"></canvas>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="javascript:void(0);" class="btn-refresh" onclick="window.location.reload();">Refresh Data</a>
+    </div>
+
+    <script>
+        // Create gradients for charts
+        function createGradient(ctx, color1, color2) {
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(1, color2);
+            return gradient;
+        }
+
+        // Chart 1: Total Transactions by Transaction Type
+        const transactionTypeCtx = document.getElementById('transactionTypeChart').getContext('2d');
+        const gradient1 = createGradient(transactionTypeCtx, 'rgba(93, 164, 219, 0.9)', 'rgba(93, 164, 219, 0.4)');
+        new Chart(transactionTypeCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ transaction_types|safe }},
+                datasets: [{
+                    label: 'Transactions',
+                    data: {{ transaction_counts|safe }},
+                    backgroundColor: gradient1,
+                    borderColor: 'rgba(93, 164, 219, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutBounce'
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                tooltips: {
+                    enabled: true,
+                    mode: 'index',
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.yLabel + ' Transactions';
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Monthly Transactions
+        const monthlyTransactionsCtx = document.getElementById('monthlyTransactionsChart').getContext('2d');
+        const gradient2 = createGradient(monthlyTransactionsCtx, 'rgba(102, 187, 106, 0.9)', 'rgba(102, 187, 106, 0.4)');
+        new Chart(monthlyTransactionsCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ months|safe }},
+                datasets: [{
+                    label: 'Total Amount',
+                    data: {{ monthly_totals|safe }},
+                    backgroundColor: gradient2,
+                    borderColor: 'rgba(102, 187, 106, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutElastic'
+                }
+            }
+        });
+
+        // Chart 3: Transaction Breakdown by User Type
+        const userTypeCtx = document.getElementById('userTypeChart').getContext('2d');
+        new Chart(userTypeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: {{ user_types|safe }},
+                datasets: [{
+                    label: 'Transactions',
+                    data: {{ user_transaction_counts|safe }},
+                    backgroundColor: ['#ff9999', '#66b3ff', '#99ff99'],
+                    borderColor: 'rgba(255, 255, 255, 0.8)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 3000,
+                    easing: 'easeOutBounce'
+                },
+                plugins: {
+                    datalabels: {
+                        display: true,
+                        color: '#fff',
+                        font: {
+                            weight: 'bold',
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+
+     
+
+
+        // Chart 4: Cumulative Transaction Volume
+        const volumeOverTimeCtx = document.getElementById('volumeOverTimeChart').getContext('2d');
+        const gradient3 = createGradient(volumeOverTimeCtx, 'rgba(153, 102, 255, 0.9)', 'rgba(153, 102, 255, 0.4)');
+        new Chart(volumeOverTimeCtx, {
+            type: 'line',
+            data: {
+                labels: {{ months|safe }},
+                datasets: [{
+                    label: 'Cumulative Volume',
+                    data: {{ cumulative_volumes|safe }},
+                    fill: true,
+                    backgroundColor: gradient3,
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 1500,
+                    easing: 'easeOutExpo'
+                }
+            }
+        });
+    </script>
+</body>
+</html>

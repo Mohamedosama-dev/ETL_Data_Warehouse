@@ -1,0 +1,25 @@
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+<div>
+    <canvas id="transactionChart" width="400" height="200"></canvas>
+</div>
+<script>
+    const labels = {{ chart_labels|safe }};
+    const data = {{ chart_data|safe }};
+    const ctx = document.getElementById('transactionChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Transaction Totals',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+            }]
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,5 @@
+﻿transaction_type_id,transaction_type
+1,deposit
+2,withdraw
+3,transfer
+4,Donation

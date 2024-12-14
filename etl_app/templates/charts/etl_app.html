@@ -1,0 +1,41 @@
+
+
+{% block content %}
+  <h1>ETL App Dashboard</h1>
+  
+  <div class="etl-buttons">
+    <a class="etl-btn" href="http://127.0.0.1:8000/etl/user-demographics/" target="_blank">User Demographics</a>
+    <a class="etl-btn" href="http://127.0.0.1:8000/etl/service-charges-overview/" target="_blank">Service Charges Overview</a>
+    <a class="etl-btn" href="http://127.0.0.1:8000/etl/donation_analysis/" target="_blank">Donation Analysis</a>
+    <a class="etl-btn" href="http://127.0.0.1:8000/etl/unified_charts/" target="_blank">Unified Charts</a>
+  </div>
+
+  <style>
+    /* Custom button styles for the ETL buttons */
+    .etl-buttons {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+        gap: 15px;
+    }
+
+    .etl-btn {
+        padding: 10px 20px;
+        background-color: #4CAF50; /* Green */
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .etl-btn:hover {
+        background-color: #45a049; /* Darker Green */
+        transform: scale(1.05);
+    }
+
+    .etl-btn:active {
+        transform: scale(0.98);
+    }
+  </style>
+
