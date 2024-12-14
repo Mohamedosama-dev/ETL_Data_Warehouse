@@ -82,6 +82,8 @@ The application utilizes a series of key models within the database:
 - **ServiceDimension**: Stores data related to different services offered by the platform.
 - **UserDemographicsDimension**: Holds demographic data such as user age groups, regions, and credit history.
 - **TransactionTypeDimension**: Captures different transaction types (e.g., deposit, withdrawal, transfer).
+  ![Screenshot 2024-12-14 at 18-35-11 Untitled - dbdiagram io](https://github.com/user-attachments/assets/62b6ce55-0c6c-40d2-ba96-2bd1342efd8c)
+
 
 ## Data Sources
 
