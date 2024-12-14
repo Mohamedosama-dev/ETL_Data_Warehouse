@@ -85,18 +85,17 @@ The application utilizes a series of key models within the database:
 
 ## Data Sources
 
-- **Transaction Data**:
-   Information related to transaction amounts, types, dates, and involved services.
+- **Transaction Data**:Information related to transaction amounts, types, dates, and involved services.
 - **Charity Data**: Details on charity donations and associated categories.
 - **User Data**: Demographic data including age group, region, and credit usage.
 - **Service Data**: Data on various services offered, including service charges and category breakdowns.
 
 ## Screenshots
--**User Demographics Dashboard**
+-**User Demographics Dashboard**:
 ![Screenshot 2024-12-14 at 14-29-09 User Demographics Dashboard](https://github.com/user-attachments/assets/2b73515e-b32b-44b7-aec9-ed10bf47ceb5)
--**service Demographics Dashboard**
+-**service Demographics Dashboard**:
 ![Screenshot 2024-12-14 at 14-49-34 Service Charges Overview](https://github.com/user-attachments/assets/48f9dad0-870a-47c7-9d3b-f268d9774a40)
--**Charity Demographics Dashboard**
+-**Charity Demographics Dashboard**:
 
 ## Acknowledgments
 
