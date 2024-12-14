@@ -1,3 +1,6 @@
+[
+![freepik__candid-image-photography-natural-textures-highly-r__1362](https://github.com/user-attachments/assets/4a638558-ce21-429b-b4db-a789c327d49d)
+](url)
 # Data Warehouse Dashboard
 
 The **Data Warehouse Dashboard** is a powerful data analytics platform built with **Django** and **SQLite**, designed to provide insightful visualizations of various data aspects, such as transactions, charity donations, user demographics, and service charges. The dashboard enables users to easily analyze and visualize key metrics through a wide array of chart types, including bar charts, pie charts, line charts, and heatmaps.
