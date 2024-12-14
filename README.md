@@ -90,15 +90,46 @@ The application utilizes a series of key models within the database:
 - **User Data**: Demographic data including age group, region, and credit usage.
 - **Service Data**: Data on various services offered, including service charges and category breakdowns.
 
-## Screenshots
-- **User Demographics Dashboard**:  
-  ![User Demographics Dashboard](https://github.com/user-attachments/assets/2b73515e-b32b-44b7-aec9-ed10bf47ceb5)
-- **Service Charges Overview**:  
-  ![Screenshot 2024-12-14 at 15-07-20 Service Charges Overview](https://github.com/user-attachments/assets/b1296f99-3e8d-4cfd-aba2-fdf717d1e9d9)
-- **Charity Charges Overview**:  
- ![Screenshot 2024-12-14 at 15-12-45 Donation Analysis](https://github.com/user-attachments/assets/62baa6a9-e289-4523-985a-abde182e7acc)
--**Transaction Dashboard**:
+# Dashboard Screenshots
+
+## Overview
+This document showcases various key dashboards and features from the transaction analytics application. Each section provides a brief description alongside a screenshot to highlight the functionality and design.
+
+---
+
+### 1. **User Demographics Dashboard**
+This dashboard provides insights into user demographics, displaying key data on user categories and trends.
+
+![User Demographics Dashboard](https://github.com/user-attachments/assets/2b73515e-b32b-44b7-aec9-ed10bf47ceb5)
+
+---
+
+### 2. **Service Charges Overview**
+This section outlines the details of service charges incurred, categorized by transaction type and volume.
+
+![Screenshot 2024-12-14 at 15-07-20 Service Charges Overview](https://github.com/user-attachments/assets/b1296f99-3e8d-4cfd-aba2-fdf717d1e9d9)
+
+---
+
+### 3. **Charity Charges Overview**
+Analyze the distribution of charity-related charges, providing transparency and insights into donation patterns.
+
+![Screenshot 2024-12-14 at 15-12-45 Donation Analysis](https://github.com/user-attachments/assets/62baa6a9-e289-4523-985a-abde182e7acc)
+
+---
+
+### 4. **Transaction Dashboard**
+The transaction analytics dashboard offers a comprehensive view of transactions, including volume, types, and trends over time.
+
 ![Screenshot 2024-12-14 at 15-19-33 Transaction Analytics](https://github.com/user-attachments/assets/5ef06164-9694-49b9-97c0-7ba648bde327)
+
+---
+
+### Notes
+- These dashboards are designed to provide actionable insights for stakeholders.
+- Data visualizations are rendered using Chart.js and incorporate a clean, professional UI for ease of interpretation.
+
+Feel free to explore each section to understand the application's capabilities!
 
 ## Acknowledgments
 
