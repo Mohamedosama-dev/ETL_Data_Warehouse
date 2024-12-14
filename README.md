@@ -92,6 +92,7 @@ The application utilizes a series of key models within the database:
 - **Service Data**: Data on various services offered, including service charges and category breakdowns.
 
 ## Screenshots
+-**User Demographics Dashboard**
 
 
 
