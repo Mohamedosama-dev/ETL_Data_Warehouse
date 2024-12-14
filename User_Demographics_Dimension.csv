@@ -1,0 +1,21 @@
+﻿user_demographics_id,region,city,age_group
+1,Cairo,Cairo,55+
+2,Cairo,Giza,18-24
+3,Cairo,Qalyubia,35-44
+4,Delta,Tanta,35-44
+5,Delta,Zagazig,25-34
+6,Delta,Damietta,55+
+7,Delta,Beni Suef,35-44
+8,Alexandria,Alexandria,45-54
+9,Alexandria,Matrouh,18-24
+10,North Upper Egypt,Aswan,25-34
+11,North Upper Egypt,Luxor,18-24
+12,North Upper Egypt,Minya,35-44
+13,North Upper Egypt,Sohag,25-34
+14,Red Sea ,Hurghada,55+
+15,Red Sea ,Safaga,35-44
+16,Red Sea ,Marsa Alam,55+
+17,Suez Canal  ,Ismailia,55+
+18,Suez Canal  ,Suez,25-34
+19,Suez Canal  ,Port Said,18-24
+20,Asyut,Asyut,18-24

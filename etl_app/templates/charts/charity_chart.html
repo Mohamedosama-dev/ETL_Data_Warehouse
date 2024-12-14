@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charity Donations by Category</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a4a4a;
+            padding: 20px 0;
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .content {
+            background-color: #ffffff;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin-top: 30px;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #777;
+            margin-top: 40px;
+            font-size: 1em;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Custom gradient colors for chart bars */
+        .gradient-bar {
+            background: linear-gradient(90deg, rgba(255, 99, 132, 1) 0%, rgba(54, 162, 235, 1) 50%, rgba(75, 192, 192, 1) 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Charity Donations by Category</h1>
+
+        <!-- Chart content -->
+        <div class="content">
+            <p><strong>Categories:</strong> {{ categories }}</p>
+            <p><strong>Donations:</strong> {{ donations }}</p>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="charityChart"></canvas>
+        </div>
+
+        <div class="footer">
+            <p>Created with ❤️ by <a href="https://yourwebsite.com" target="_blank">Your Name</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Assuming 'categories' and 'donations' are passed as JSON objects.
+        const categories = {{ categories|safe }};
+        const donations = {{ donations|safe }};
+
+        console.log('Categories:', categories);
+        console.log('Donations:', donations);
+
+        if (categories.length > 0 && donations.length > 0) {
+            const ctx = document.getElementById('charityChart').getContext('2d');
+
+            // Define a gradient for the bars
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(255, 99, 132, 0.6)');
+            gradient.addColorStop(0.5, 'rgba(54, 162, 235, 0.6)');
+            gradient.addColorStop(1, 'rgba(75, 192, 192, 0.6)');
+
+            const charityChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        label: 'Total Donations',
+                        data: donations,
+                        backgroundColor: gradient,  // Apply the gradient
+                        borderColor: '#fff',  // White border around the bars
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();  // Format the y-axis values as currency
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                fontColor: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+        } else {
+            console.error('No data available for the chart.');
+        }
+    </script>
+
+</body>
+</html>

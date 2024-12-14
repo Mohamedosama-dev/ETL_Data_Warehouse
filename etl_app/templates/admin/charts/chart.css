@@ -1,0 +1,6 @@
+/* templates/admin/charts/chart.css */
+
+canvas {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}

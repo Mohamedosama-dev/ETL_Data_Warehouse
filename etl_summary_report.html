@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETL Summary Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #f4f4f4, #e8f5e9);
+            color: #444;
+            padding: 20px;
+        }
+        h1 {
+            color: #2E7D32;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        thead {
+            background: linear-gradient(90deg, #4CAF50, #81C784);
+            color: white;
+        }
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+        }
+        th {
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e0f2f1;
+            transition: background-color 0.3s;
+        }
+        td {
+            font-size: 1rem;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            th, td {
+                text-align: right;
+                padding: 10px;
+                position: relative;
+                border: none;
+            }
+            th {
+                background-color: transparent;
+                color: #4CAF50;
+                text-align: left;
+            }
+            td:before {
+                content: attr(data-label);
+                font-weight: bold;
+                text-transform: uppercase;
+                position: absolute;
+                left: 10px;
+                color: #4CAF50;
+            }
+            td:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>ETL Process Summary</h1>
+<p>The following table provides a summary of the ETL process, showing the row count for each table.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Table Name</th>
+            <th>Row Count</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td data-label="Table Name">Service_Dimension</td>
+            <td data-label="Row Count">500</td>
+        </tr>
+    
+        <tr>
+            <td data-label="Table Name">Charity_Dimension</td>
+            <td data-label="Row Count">500</td>
+        </tr>
+    
+        <tr>
+            <td data-label="Table Name">User_Dimension</td>
+            <td data-label="Row Count">500</td>
+        </tr>
+    
+        <tr>
+            <td data-label="Table Name">Date_Dimension</td>
+            <td data-label="Row Count">366</td>
+        </tr>
+    
+        <tr>
+            <td data-label="Table Name">User_Demographics_Dimension</td>
+            <td data-label="Row Count">20</td>
+        </tr>
+    
+        <tr>
+            <td data-label="Table Name">Transaction_Type_Dimension</td>
+            <td data-label="Row Count">4</td>
+        </tr>
+    
+        <tr>
+            <td data-label="Table Name">Service_Category_Dimension</td>
+            <td data-label="Row Count">2</td>
+        </tr>
+    
+        <tr>
+            <td data-label="Table Name">Charity_Category_Dimension</td>
+            <td data-label="Row Count">3</td>
+        </tr>
+    
+        <tr>
+            <td data-label="Table Name">Transaction_Fact</td>
+            <td data-label="Row Count">500</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+<div class="footer">
+    <p>Generated on: <strong>2024-12-02 00:04:25</strong></p>
+</div>
+
+</body>
+</html>

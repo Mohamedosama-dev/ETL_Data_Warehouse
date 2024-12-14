@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Charges Overview</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Reset and Fonts */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: linear-gradient(135deg, #ffffff, #f0f4f8);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            animation: slideUp 1.5s ease-out;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: #444;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .kpi {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: slideUp 1.5s ease-out;
+        }
+
+        .kpi-item {
+            background: linear-gradient(135deg, #f9f9f9, #e3e8f0);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            flex: 1;
+            position: relative;
+        }
+
+        .kpi-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .kpi-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .kpi-item:hover::after {
+            opacity: 1;
+        }
+
+        .kpi-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .kpi-item p {
+            font-size: 1.6rem;
+            color: #1a73e8;
+            font-weight: bold;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1.1rem;
+        }
+
+        ul li {
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #ffffff, #e8f0f8);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        ul li:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .chart {
+            flex: 1;
+            min-width: 45%;
+            background: linear-gradient(135deg, #fdfdfd, #f7f9fc);
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .chart:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .chart::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .kpi {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .chart-container {
+                flex-direction: column;
+            }
+
+            .chart {
+                min-width: 100%;
+            }
+        }
+
+
+
+        /* Button Container */
+.button-container {
+    position: absolute;
+    top: 70px;
+    right: 85px;
+}
+
+/* Action Button */
+.action-button {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.action-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #00f2fe, #4facfe);
+}
+
+.action-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Service Charges Overview</h1>
+    <div class="button-container">
+        <a href="http://127.0.0.1:8000/admin/" class="action-button">Admin Panal</a>
+    </div>
+
+    <!-- KPI Section -->
+    <div class="kpi">
+        <div class="kpi-item">
+            <h3>Total Service Charges</h3>
+            <p>${{ total_service_charges }}</p>
+        </div>
+        <div class="kpi-item">
+            <h3>Average Charge per User</h3>
+            <p>${{ avg_charge_per_user }}</p>
+        </div>
+        <div class="kpi-item">
+            <h3>Charges This Month</h3>
+            <p>${{ charges_this_month }}</p>
+        </div>
+    </div>
+
+    <!-- Top Categories Section -->
+    <h3>Top Categories with the Highest Charges</h3>
+    <ul>
+        {% for category, charge in top_categories %}
+        <li>{{ category }}: ${{ charge }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Chart Section -->
+    <div class="chart-container">
+        <div class="chart">
+            <canvas id="barChart"></canvas>
+        </div>
+        <div class="chart">
+            <canvas id="pieChart"></canvas>
+        </div>
+    </div>
+    <div class="chart-container">
+        <div class="chart">
+            <canvas id="stackedBarChart"></canvas>
+        </div>
+        <div class="chart">
+            <canvas id="donutChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Chart initialization code remains the same
+</script>
+
+
+
+<script>
+    // Chart data
+    const serviceTypes = JSON.parse('{{ service_types|escapejs }}');
+    const serviceChargesByType = JSON.parse('{{ service_charges_by_type|escapejs }}');
+    const categoryNames = JSON.parse('{{ category_names|escapejs }}');
+    const serviceChargesByCategory = JSON.parse('{{ service_charges_by_category|escapejs }}');
+    const transactionTypes = JSON.parse('{{ transaction_types|escapejs }}');
+    const categories = JSON.parse('{{ categories|escapejs }}');
+    const serviceChargesByTypeAndCategory = JSON.parse('{{ service_charges_by_type_and_category|escapejs }}');
+    const serviceTypesDonut = JSON.parse('{{ service_types_donut|escapejs }}');
+    const serviceChargesByTypeDonut = JSON.parse('{{ service_charges_by_type_donut|escapejs }}');
+
+    // Charts
+    const barChartCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barChartCtx, {
+        type: 'bar',
+        data: {
+            labels: serviceTypes,
+            datasets: [{
+                label: 'Service Charges',
+                data: serviceChargesByType,
+                backgroundColor: '#36A2EB',
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+
+    const pieChartCtx = document.getElementById('pieChart').getContext('2d');
+    new Chart(pieChartCtx, {
+        type: 'pie',
+        data: {
+            labels: categoryNames,
+            datasets: [{ data: serviceChargesByCategory, backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A1'] }]
+        },
+        options: { responsive: true }
+    });
+
+    const stackedBarChartCtx = document.getElementById('stackedBarChart').getContext('2d');
+    new Chart(stackedBarChartCtx, {
+        type: 'bar',
+        data: {
+            labels: categories,
+            datasets: transactionTypes.map(tx => ({
+                label: tx,
+                data: categories.map(cat => serviceChargesByTypeAndCategory[tx][cat] || 0),
+                backgroundColor: 'rgba(75, 192, 192, 0.5)'
+            }))
+        },
+        options: { responsive: true, scales: { x: { stacked: true }, y: { stacked: true } } }
+    });
+
+    const donutChartCtx = document.getElementById('donutChart').getContext('2d');
+    new Chart(donutChartCtx, {
+        type: 'doughnut',
+        data: {
+            labels: serviceTypesDonut,
+            datasets: [{ data: serviceChargesByTypeDonut, backgroundColor: ['#FFB6C1', '#FF7F50', '#ADD8E6', '#90EE90'] }]
+        },
+        options: { responsive: true }
+    });
+</script>
+
+</body>
+</html>

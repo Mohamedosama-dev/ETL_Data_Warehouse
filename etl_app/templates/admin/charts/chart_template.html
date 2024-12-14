@@ -1,0 +1,36 @@
+<!-- templates/admin/charts/chart_template.html -->
+
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+    <h1>Transaction Statistics</h1>
+    <canvas id="transactionChart" width="400" height="200"></canvas>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Example data passed from Django views
+        var chartData = {{ chart_data | safe }};
+        
+        var ctx = document.getElementById('transactionChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: chartData.labels, // Labels from Django context
+                datasets: [{
+                    label: '# of Transactions',
+                    data: chartData.data, // Data from Django context
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
