@@ -92,14 +92,13 @@ The application utilizes a series of key models within the database:
 
 ## Screenshots
 - **User Demographics Dashboard**:  
-  A dashboard visualizing user data by age group, region, and credit usage, as well as a heatmap of transaction volume.  
   ![User Demographics Dashboard](https://github.com/user-attachments/assets/2b73515e-b32b-44b7-aec9-ed10bf47ceb5)
-
 - **Service Charges Overview**:  
-  Displays the total service charges, average charges per user, and categorizes service charges for detailed analysis.  
   ![Screenshot 2024-12-14 at 15-07-20 Service Charges Overview](https://github.com/user-attachments/assets/b1296f99-3e8d-4cfd-aba2-fdf717d1e9d9)
-
--**Charity Demographics Dashboard**:
+- **Charity Charges Overview**:  
+ ![Screenshot 2024-12-14 at 15-12-45 Donation Analysis](https://github.com/user-attachments/assets/62baa6a9-e289-4523-985a-abde182e7acc)
+-**Transaction Dashboard**:
+![Screenshot 2024-12-14 at 15-19-33 Transaction Analytics](https://github.com/user-attachments/assets/5ef06164-9694-49b9-97c0-7ba648bde327)
 
 ## Acknowledgments
 
