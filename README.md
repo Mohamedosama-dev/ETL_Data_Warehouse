@@ -29,15 +29,15 @@ To set up and run the **Data Warehouse Dashboard** locally, follow these steps:
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/yourusername/data-warehouse-dashboard.git
-    cd data-warehouse-dashboard
+    git clone https://github.com/Mohamedosama-dev/ETL_Data_Warehouse_.git
+    cd etl_project
     ```
 
-2. **Create a virtual environment (recommended)**:
+2. **Create a virtual environment**:
 
     ```bash
     python -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    source venv/bin/activate  
     ```
 
 3. **Install project dependencies**:
