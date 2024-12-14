@@ -97,7 +97,7 @@ The application utilizes a series of key models within the database:
 
 - **Service Charges Overview**:  
   Displays the total service charges, average charges per user, and categorizes service charges for detailed analysis.  
-  ![Service Charges Overview](https://github.com/user-attachments/assets/48f9dad0-870a-47c7-9d3b-f268d9774a40)
+  ![Screenshot 2024-12-14 at 15-07-20 Service Charges Overview](https://github.com/user-attachments/assets/b1296f99-3e8d-4cfd-aba2-fdf717d1e9d9)
 
 -**Charity Demographics Dashboard**:
 
